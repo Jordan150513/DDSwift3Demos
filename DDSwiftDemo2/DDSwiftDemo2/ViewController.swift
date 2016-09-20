@@ -21,17 +21,29 @@ class ViewController: UIViewController {
         self.view.addSubview(backGroundImageView)
   
         let logoImageView = UIImageView(image: UIImage(named:"登录logo370x150"))
+        //遗漏了这个
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.contentMode = .scaleAspectFill
         backGroundImageView.addSubview(logoImageView)
-
-        let top:NSLayoutConstraint = NSLayoutConstraint(item: logoImageView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: backGroundImageView, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 100)
-        logoImageView.superview!.addConstraint(top)
+        /*
+        let top = NSLayoutConstraint(item: logoImageView, attribute: .top, relatedBy: .equal, toItem: backGroundImageView, attribute: .top, multiplier: 1.0, constant: 100)
+        backGroundImageView.addConstraint(top)
         
-        let leading:NSLayoutConstraint = NSLayoutConstraint(item: logoImageView, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: backGroundImageView, attribute: NSLayoutAttribute.leading, multiplier: 1.0, constant: 50)
-        logoImageView.superview!.addConstraint(leading)
+        let leading = NSLayoutConstraint(item: logoImageView, attribute: .leading, relatedBy: .equal, toItem: backGroundImageView, attribute: .leading, multiplier: 1.0, constant: 100)
+        backGroundImageView.addConstraint(leading)
         
-        let trailing:NSLayoutConstraint = NSLayoutConstraint(item: logoImageView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: backGroundImageView, attribute: NSLayoutAttribute.trailing, multiplier: 1.0, constant: -50)
-        logoImageView.superview!.addConstraint(trailing)
-        //感觉没有起作用，怎么回事呢？
+        let trailing = NSLayoutConstraint(item: logoImageView, attribute: .trailing, relatedBy: .equal, toItem: backGroundImageView, attribute: .trailing, multiplier: 1.0, constant: -100)
+        backGroundImageView.addConstraint(trailing)
+        
+        let height = NSLayoutConstraint(item: logoImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 80)
+        logoImageView.addConstraint(height)
+        */
+        //还可以用VLF语法布局－－－－－－－－
+        let dict = ["logoImageView": logoImageView]
+        let logoImageView_Constraint_H = NSLayoutConstraint.constraints(withVisualFormat: "H:|-100-[logoImageView]-100-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dict)
+        let logoImageView_Constraint_V = NSLayoutConstraint.constraints(withVisualFormat: "V:|-100-[logoImageView(\(80))]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: dict)
+        backGroundImageView.addConstraints(logoImageView_Constraint_V)
+        backGroundImageView.addConstraints(logoImageView_Constraint_H)
         
     }
 
