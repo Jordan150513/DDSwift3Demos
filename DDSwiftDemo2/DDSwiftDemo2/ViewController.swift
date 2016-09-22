@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var checkImageView : UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,8 +148,46 @@ class ViewController: UIViewController {
         backGroundImageView.addConstraint(usernameTextField_top)
         let usernameTextField_bottom = NSLayoutConstraint(item: usernameTextField, attribute: .bottom, relatedBy: .equal, toItem: userNameBGView, attribute: .bottom, multiplier: 1.0, constant: 0)
         backGroundImageView.addConstraint(usernameTextField_bottom)
-        let usernameTextField_trailing = NSLayoutConstraint(item: usernameTextField, attribute: .trailing, relatedBy: .equal, toItem: userNameBGView, attribute: .trailing, multiplier: 1.0, constant: -40)
+        let usernameTextField_trailing = NSLayoutConstraint(item: usernameTextField, attribute: .trailing, relatedBy: .equal, toItem: userNameBGView, attribute: .trailing, multiplier: 1.0, constant: -30)
         backGroundImageView.addConstraint(usernameTextField_trailing)
+        
+//        //用户名下拉三角
+//        let arrowImageView = UIImageView(image: UIImage(named: "arrow_shu"))
+//        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+//        arrowImageView.isUserInteractionEnabled = true
+//        arrowImageView.contentMode = .scaleAspectFit
+//        userNameBGView.addSubview(arrowImageView)
+//        let arrowImageView_leading = NSLayoutConstraint(item: arrowImageView, attribute: .leading, relatedBy: .equal, toItem: usernameTextField, attribute: .trailing, multiplier: 1.0, constant: 10)
+//        userNameBGView.addConstraint(arrowImageView_leading)
+//        
+//        let arrowImageView_top = NSLayoutConstraint(item: arrowImageView, attribute: .top, relatedBy: .equal, toItem: userNameBGView, attribute: .top, multiplier: 1.0, constant: 17)
+//        backGroundImageView.addConstraint(arrowImageView_top)
+//        
+//        let arrowImageView_trailing = NSLayoutConstraint(item: arrowImageView, attribute: .trailing, relatedBy: .equal, toItem: userNameBGView, attribute: .trailing, multiplier: 1.0, constant: -10)
+//        backGroundImageView.addConstraint(arrowImageView_trailing)
+//        
+//        let arrowImageView_bottom = NSLayoutConstraint(item: arrowImageView, attribute: .bottom, relatedBy: .equal, toItem: userNameBGView, attribute: .bottom, multiplier: 1.0, constant: -17)
+//        backGroundImageView.addConstraint(arrowImageView_bottom)
+        
+        //用户名下拉三角Btn
+        let arrowBtn = UIButton(type: .custom)
+        arrowBtn.setImage(UIImage(named: "arrow_shu"), for: .normal)
+        arrowBtn.imageView?.contentMode = .scaleAspectFit
+        userNameBGView.addSubview(arrowBtn)
+        //总是忘记这个，不加上这个就不会出现布局效果
+        arrowBtn.translatesAutoresizingMaskIntoConstraints = false
+        let arrowBtn_leading = NSLayoutConstraint(item: arrowBtn, attribute: .leading, relatedBy: .equal, toItem: usernameTextField, attribute: .trailing, multiplier: 1.0, constant: 0)
+        userNameBGView.addConstraint(arrowBtn_leading)
+        
+        let arrowBtn_top = NSLayoutConstraint(item: arrowBtn, attribute: .top, relatedBy: .equal, toItem: userNameBGView, attribute: .top, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(arrowBtn_top)
+        
+        let arrowBtn_trailing = NSLayoutConstraint(item: arrowBtn, attribute: .trailing, relatedBy: .equal, toItem: userNameBGView, attribute: .trailing, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(arrowBtn_trailing)
+        
+        let arrowBtn_bottom = NSLayoutConstraint(item: arrowBtn, attribute: .bottom, relatedBy: .equal, toItem: userNameBGView, attribute: .bottom, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(arrowBtn_bottom)
+        arrowBtn.addTarget(self, action: #selector(ViewController.arrowBtnClicked), for: UIControlEvents.touchUpInside)
         
         //密码输入textfield
         let passwordTextField = UITextField()
@@ -160,11 +201,101 @@ class ViewController: UIViewController {
         backGroundImageView.addConstraint(passwordTextField_top)
         let passwordTextField_bottom = NSLayoutConstraint(item: passwordTextField, attribute: .bottom, relatedBy: .equal, toItem: passwordBGView, attribute: .bottom, multiplier: 1.0, constant: 0)
         backGroundImageView.addConstraint(passwordTextField_bottom)
-        let passwordTextField_trailing = NSLayoutConstraint(item: passwordTextField, attribute: .trailing, relatedBy: .equal, toItem: passwordBGView, attribute: .trailing, multiplier: 1.0, constant: -40)
+        let passwordTextField_trailing = NSLayoutConstraint(item: passwordTextField, attribute: .trailing, relatedBy: .equal, toItem: passwordBGView, attribute: .trailing, multiplier: 1.0, constant: -30)
         backGroundImageView.addConstraint(passwordTextField_trailing)
         
-
+        //登陆按钮
+        let loginBtn = UIButton(type: .custom)
+        loginBtn.setTitle("登录", for: .normal)
+        loginBtn.backgroundColor = UIColor.blue
+        loginBtn.layer.cornerRadius = 20
+        loginBtn.layer.masksToBounds = true
+        loginBtn.translatesAutoresizingMaskIntoConstraints = false
+        backGroundImageView.addSubview(loginBtn)
+        
+        let loginBtn_leading = NSLayoutConstraint(item: loginBtn, attribute: .leading, relatedBy: .equal, toItem: backGroundImageView, attribute: .leading, multiplier: 1.0, constant: 30)
+        self.view.addConstraint(loginBtn_leading)
+        
+        let loginBtn_top = NSLayoutConstraint(item: loginBtn, attribute: .top, relatedBy: .equal, toItem: passwordBGView, attribute: .bottom, multiplier: 1.0, constant: 60)
+        self.view.addConstraint(loginBtn_top)
+        
+        let loginBtn_trailing = NSLayoutConstraint(item: loginBtn, attribute: .trailing, relatedBy: .equal, toItem: backGroundImageView, attribute: .trailing, multiplier: 1.0, constant: -30)
+        self.view.addConstraint(loginBtn_trailing)
+        
+        let loginBtn_height = NSLayoutConstraint(item: loginBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 40)
+        loginBtn.addConstraint(loginBtn_height)
+        
+        loginBtn.addTarget(self, action: #selector(ViewController.loginBtnClicked), for: .touchUpInside)
+        
+        //记住密码按钮
+        let rememberPasswordBtn = UIButton(type: .custom)
+        rememberPasswordBtn.setTitle("记住密码", for: .normal)
+        rememberPasswordBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        rememberPasswordBtn.translatesAutoresizingMaskIntoConstraints = false
+        rememberPasswordBtn.titleLabel?.textAlignment = .left
+        backGroundImageView.addSubview(rememberPasswordBtn)
+        let rememberPasswordBtn_top = NSLayoutConstraint(item: rememberPasswordBtn, attribute: .top, relatedBy: .equal, toItem: passwordBGView, attribute: .bottom, multiplier: 1.0, constant: 10)
+        backGroundImageView.addConstraint(rememberPasswordBtn_top)
+        let rememberPasswordBtn_trailing = NSLayoutConstraint(item: rememberPasswordBtn, attribute: .trailing, relatedBy: .equal, toItem: passwordBGView, attribute: .trailing, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(rememberPasswordBtn_trailing)
+        let rememberPasswordBtn_height = NSLayoutConstraint(item: rememberPasswordBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 30)
+        rememberPasswordBtn.addConstraint(rememberPasswordBtn_height)
+        rememberPasswordBtn.addTarget(self, action: #selector(ViewController.rememberBtnClicked), for: .touchUpInside)
+        
+        let rememberBoxBtn = UIButton(type: .custom)
+        rememberBoxBtn.setImage(UIImage(named: "记住密码9603.9.0"), for: .normal)
+        rememberBoxBtn.translatesAutoresizingMaskIntoConstraints = false
+        rememberBoxBtn.imageView?.contentMode = .scaleAspectFit
+        rememberBoxBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        rememberBoxBtn.layoutIfNeeded()
+        backGroundImageView.addSubview(rememberBoxBtn)
+        
+        let rememberBoxBtn_top = NSLayoutConstraint(item: rememberBoxBtn, attribute: .top, relatedBy: .equal, toItem: rememberPasswordBtn, attribute: .top, multiplier: 1.0, constant: 10)
+        backGroundImageView.addConstraint(rememberBoxBtn_top)
+        
+        let rememberBoxBtn_trailing = NSLayoutConstraint(item: rememberBoxBtn, attribute: .trailing, relatedBy: .equal, toItem: rememberPasswordBtn, attribute: .leading, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(rememberBoxBtn_trailing)
+        
+        let rememberBoxBtn_height = NSLayoutConstraint(item: rememberBoxBtn, attribute: .height, relatedBy: .equal, toItem: rememberPasswordBtn, attribute: .height, multiplier: 1.0, constant: -20)
+        backGroundImageView.addConstraint(rememberBoxBtn_height)
+        
+        let rememberBoxBtn_width = NSLayoutConstraint(item: rememberBoxBtn, attribute: .width, relatedBy: .equal, toItem: rememberBoxBtn, attribute: .height, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(rememberBoxBtn_width)
+        
+//        rememberBoxBtn.addTarget(self, action: #selector(ViewController.rememberBtnClicked), for: .touchUpInside)
+       
+        checkImageView = UIImageView(image: UIImage(named: "对勾9603.9.0"))
+        checkImageView.contentMode = .scaleAspectFit
+        checkImageView.translatesAutoresizingMaskIntoConstraints = false
+        checkImageView.backgroundColor = UIColor.clear
+        rememberBoxBtn.addSubview(checkImageView)
+        
+        let checkImageView_leading = NSLayoutConstraint(item: checkImageView, attribute: .leading, relatedBy: .equal, toItem: rememberBoxBtn, attribute: .leading, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(checkImageView_leading)
+        
+        let checkImageView_top = NSLayoutConstraint(item: checkImageView, attribute: .top, relatedBy: .equal, toItem: rememberBoxBtn, attribute: .top, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(checkImageView_top)
+        
+        let checkImageView_trailing = NSLayoutConstraint(item: checkImageView, attribute: .trailing, relatedBy: .equal, toItem: rememberBoxBtn, attribute: .trailing, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(checkImageView_trailing)
+        
+        let checkImageView_bottom = NSLayoutConstraint(item: checkImageView, attribute: .bottom, relatedBy: .equal, toItem: rememberBoxBtn, attribute: .bottom, multiplier: 1.0, constant: 0)
+        backGroundImageView.addConstraint(checkImageView_bottom)
+        checkImageView.isHidden = true
     }
+    //记住按钮的点击事件
+    func rememberBtnClicked() {
+        checkImageView.isHidden = !checkImageView.isHidden
+    }
+    //登录按钮的点击事件
+    func loginBtnClicked() {
+        
+    }
+    //用户名下拉箭头按钮的点击事件
+    func arrowBtnClicked() {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
