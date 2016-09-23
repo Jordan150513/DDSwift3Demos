@@ -8,9 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     var checkImageView : UIImageView!
+    var usernameTextField : UITextField!
+    var passwordTextField : UITextField!
+    var usernamePasswordDict : NSMutableDictionary!
+    var userNamesTableView : UITableView!
+    
     
     
     override func viewDidLoad() {
@@ -137,10 +142,11 @@ class ViewController: UIViewController {
         backGroundImageView.addConstraint(passwordIconimageV_width)
         
         //用户名输入textfield
-        let usernameTextField = UITextField()
+        usernameTextField = UITextField()
         usernameTextField.placeholder = "请输入用户名"
         //        usernameTextField.backgroundColor = UIColor.green
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.clearButtonMode = .whileEditing
         userNameBGView.addSubview(usernameTextField)
         let usernameTextField_leading = NSLayoutConstraint(item: usernameTextField, attribute: .leading, relatedBy: .equal, toItem: userNameIconimageV, attribute: .trailing, multiplier: 1.0, constant: 5)
         userNameBGView.addConstraint(usernameTextField_leading)
@@ -190,7 +196,7 @@ class ViewController: UIViewController {
         arrowBtn.addTarget(self, action: #selector(ViewController.arrowBtnClicked), for: UIControlEvents.touchUpInside)
         
         //密码输入textfield
-        let passwordTextField = UITextField()
+        passwordTextField = UITextField()
         passwordTextField.placeholder = "请输入密码"
         //        passwordTextField.backgroundColor = UIColor.green
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -282,6 +288,27 @@ class ViewController: UIViewController {
         let checkImageView_bottom = NSLayoutConstraint(item: checkImageView, attribute: .bottom, relatedBy: .equal, toItem: rememberBoxBtn, attribute: .bottom, multiplier: 1.0, constant: 0)
         backGroundImageView.addConstraint(checkImageView_bottom)
         checkImageView.isHidden = true
+        
+        //用户名的tableView下拉tableView
+        userNamesTableView = UITableView(frame: CGRect.zero, style: .plain)
+        userNamesTableView.translatesAutoresizingMaskIntoConstraints = false
+        backGroundImageView.addSubview(userNamesTableView)
+        userNamesTableView.delegate = self
+        userNamesTableView.dataSource = self
+    }
+    //table的数据源
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//    }
+    //tableView代理方法
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     //记住按钮的点击事件
     func rememberBtnClicked() {
@@ -289,12 +316,31 @@ class ViewController: UIViewController {
     }
     //登录按钮的点击事件
     func loginBtnClicked() {
-        
+        if (usernameTextField.text?.isEmpty)!||usernameTextField.text==nil {
+            print("请输入用户名")
+        }else if (passwordTextField.text?.isEmpty)!||passwordTextField.text == nil{
+            print("请输入密码")
+        }else{
+            loginAndRemeberUsers()
+        }
+    }
+    
+    //进行登陆操作和记住密码
+    func loginAndRemeberUsers() {
+        if !checkImageView.isHidden {
+            //需要记住密码
+            usernamePasswordDict = NSMutableDictionary(capacity: 10)
+            usernamePasswordDict.setValue(passwordTextField.text, forKey: usernameTextField.text!)
+        }
+
     }
     //用户名下拉箭头按钮的点击事件
     func arrowBtnClicked() {
-        
-    }
+        if usernamePasswordDict.count>0 {
+            //让用户名的tableview显示出来
+            
+        }
+           }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
