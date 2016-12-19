@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5c4-fk-h4P">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--day1-->
+        <scene sceneID="YU9-xb-xtr">
+            <objects>
+                <viewController id="rgR-R0-c4n" sceneMemberID="viewController">
+                    <label key="view" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NIn-0Z-1TW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <navigationItem key="navigationItem" title="day1" prompt="" id="XS0-6k-Ehd">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="pXd-HO-EUb"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="05N-7N-Kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="105" y="-1093"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Th-SO-4ZX">
+            <objects>
+                <navigationController id="5c4-fk-h4P" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L1D-vY-paH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pUa-Xz-mbl" kind="relationship" relationship="rootViewController" id="Bc0-RP-NPd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h6q-rS-cqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1308" y="-161"/>
+        </scene>
+        <!--Day1-->
+        <scene sceneID="mgw-jO-eCQ">
+            <objects>
+                <viewController id="pUa-Xz-mbl" customClass="ViewController" customModule="DayOne" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8G-Z4-xx4"/>
+                        <viewControllerLayoutGuide type="bottom" id="G4F-f5-rx1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Wv-sB-FKj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMF-hK-Pw1">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3SI-M9-t8E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-zX-RL1">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3e4-c5-u8g"/>
+                                </constraints>
+                                <state key="normal" title="Tap"/>
+                                <connections>
+                                    <action selector="tapBtnClicked:" destination="pUa-Xz-mbl" eventType="touchUpInside" id="341-Mc-8SU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tMF-hK-Pw1" firstAttribute="leading" secondItem="9Wv-sB-FKj" secondAttribute="leadingMargin" id="6gj-5S-BP1"/>
+                            <constraint firstItem="tMF-hK-Pw1" firstAttribute="trailing" secondItem="9Wv-sB-FKj" secondAttribute="trailingMargin" id="Mr8-aE-gDr"/>
+                            <constraint firstItem="tMF-hK-Pw1" firstAttribute="top" secondItem="Y8G-Z4-xx4" secondAttribute="bottom" constant="147" id="TBG-2X-z4Y"/>
+                            <constraint firstItem="PcH-zX-RL1" firstAttribute="leading" secondItem="9Wv-sB-FKj" secondAttribute="leadingMargin" id="g22-Qz-GAa"/>
+                            <constraint firstItem="PcH-zX-RL1" firstAttribute="trailing" secondItem="9Wv-sB-FKj" secondAttribute="trailingMargin" id="o13-hx-765"/>
+                            <constraint firstItem="PcH-zX-RL1" firstAttribute="top" secondItem="tMF-hK-Pw1" secondAttribute="bottom" constant="67" id="stu-Oe-6dj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Day1" id="49c-8b-SSC">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="88Y-wg-D7s">
+                            <connections>
+                                <action selector="resetBtnClicked:" destination="pUa-Xz-mbl" id="vzM-kG-JDK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="countLabel" destination="tMF-hK-Pw1" id="Vjd-fR-34d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6PU-MF-g7s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-503.19999999999999" y="-167.76611694152925"/>
+        </scene>
+    </scenes>
+</document>
